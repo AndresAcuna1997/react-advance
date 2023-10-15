@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, NavLink, Navigate } from "react-router-do
 
 import logo from '../assets/react.svg';
 import { routes } from "./routes";
+import { ShoppingPage } from "../Component-patterns/pages/ShoppingPage";
 
 export const Navigations = () => {
     return (
@@ -21,6 +22,9 @@ export const Navigations = () => {
                             <li>
                                 <NavLink to="/users" className={(isActive) => isActive ? 'nav-active' : ''} >Users</NavLink>
                             </li>
+                            <li>
+                                <NavLink to="/shopping" className={(isActive) => isActive ? 'nav-active' : ''} >Shopping</NavLink>
+                            </li>
 
                             {
                                 routes.map((route) => (
@@ -34,6 +38,7 @@ export const Navigations = () => {
                     </nav>
 
                     <Routes>
+                        <Route path="shopping" element={<ShoppingPage />} />
                         <Route path="about" element={<h1>About Page</h1>} />
                         <Route path="users" element={<h1>Users Page</h1>} />
                         <Route path="home" element={<h1>Home Page</h1>} />
