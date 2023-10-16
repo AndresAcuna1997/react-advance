@@ -1,5 +1,6 @@
 import { ProductCard, ProductButtons, ProductImage, ProductTitle } from "../components"
 
+import "../styles/custom-styles.css";
 
 const products = [
   {
@@ -10,31 +11,6 @@ const products = [
   {
     id: "2",
     title: "Producto 2",
-
-  },
-  {
-    id: "3",
-    title: "Producto 3",
-
-  },
-  {
-    id: "4",
-    title: "Producto 4",
-
-  },
-  {
-    id: "5",
-    title: "Producto 5",
-
-  },
-  {
-    id: "6",
-    title: "Producto 6",
-
-  },
-  {
-    id: "7",
-    title: "Producto 7",
 
   }
 ];
@@ -48,13 +24,38 @@ export const ShoppingPage = () => {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {
           products.map((product, i) =>
-            <ProductCard key={i} product={product}>
-              <ProductImage />
-              <ProductTitle />
-              <ProductButtons />
+            <ProductCard
+              key={i}
+              product={product}
+              className="bg-dark text-white"
+            >
+              <ProductImage
+                className="custom-image"
+              />
+              <ProductTitle
+                className=" text-bold"
+              />
+              <ProductButtons
+                className="custom-buttons"
+              />
             </ProductCard>
           )
         }
+
+        <ProductCard
+          product={products[0]}
+          className="bg-dark text-white"
+        >
+          <ProductImage
+            className="custom-image"
+          />
+          <ProductTitle
+            className=" text-bold"
+          />
+          <ProductButtons
+            className="custom-buttons"
+          />
+        </ProductCard>
       </div>
     </div>
   )
