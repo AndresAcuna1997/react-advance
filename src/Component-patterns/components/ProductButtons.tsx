@@ -1,27 +1,35 @@
-import { useContext, FC, CSSProperties } from 'react';
+import { useContext, FC, CSSProperties, useCallback } from 'react';
 import { ProductContext } from "./ProductCard";
-import styles from '../styles/styles.module.css'
+import styles from '../styles/styles.module.css';
 
 interface Props {
-    className?: string;
-    style?: CSSProperties;
+  className?: string;
+  style?: CSSProperties;
 
 }
 
-export const ProductButtons: FC<Props> = ({ className, style }) => {
+export const ProductButtons: FC<Props> = ( { className, style } ) => {
 
-    const { counter, increaseBy } = useContext(ProductContext)
+  const { counter, increaseBy, initialValues } = useContext( ProductContext );
 
-    return (
-        <div
-            style={style}
-            className={`${styles.buttonsContainer} ${className}`}
-        >
-            <button onClick={() => increaseBy(-1)} className={styles.buttonMinus}>-</button>
+  const { maxCount } = initialValues || {};
 
-            <div className={styles.countLabel}>{counter}</div>
+  const isMaxReached = useCallback( () => !!maxCount  && counter >= maxCount, [ counter, maxCount ] );
 
-            <button onClick={() => increaseBy(1)} className={styles.buttonAdd}>+</button>
-        </div>
-    )
-}
+  return (
+    <div
+      style={ style }
+      className={ `${ styles.buttonsContainer } ${ className }` }
+    >
+      <button onClick={ () => increaseBy( -1 ) } className={ styles.buttonMinus }>-</button>
+
+      <div className={ styles.countLabel }>{ counter }</div>
+
+      <button
+        onClick={ () => increaseBy( 1 ) }
+        disabled={ isMaxReached() }
+        className={ `${ styles.buttonAdd } ${ isMaxReached() === true ? styles.disabled : "" }` }>
+        +</button>
+    </div>
+  );
+};
